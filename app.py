@@ -4,7 +4,7 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////mnt/c/Users/antho/Documents/blog/blog.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////mnt/sda2/Blog/beautiful_blog/flask_blog/blog.db'
 
 db = SQLAlchemy(app)
 
@@ -16,11 +16,25 @@ class Blogpost(db.Model):
     date_posted = db.Column(db.DateTime)
     content = db.Column(db.Text)
 
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50))
+    password = db.Column(db.String(50))
+    birthday = db.Column(db.String(20))
+    date_posted = db.Column(db.DateTime)
+    content = db.Column(db.Text)
+
+
 @app.route('/')
 def index():
     posts = Blogpost.query.order_by(Blogpost.date_posted.desc()).all()
 
     return render_template('index.html', posts=posts)
+
+@app.route('/login')
+def login():
+	return 'Hello world!'
 
 @app.route('/about')
 def about():

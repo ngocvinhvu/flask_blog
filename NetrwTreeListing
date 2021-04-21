@@ -1,0 +1,11 @@
+../
+flask_blog/
+| .git/
+| __pycache__/
+| static/
+| templates/
+| .app.py.swp*
+| LICENSE*
+| README.md*
+| app.py*
+| blog.db*
